@@ -60,17 +60,23 @@ function handleSubmit(evt) {
     const maxPeriod = 18;
     if (Number.isNaN(amount)) {
         amountErrEl.textContent = 'Неверное значение. Введите число, например: 15000';
+        return;
     } else if (amount < minSum) {
         amountErrEl.textContent = `Неверное значение. Минимальная сумма: ${minSum} ₽`;
+        return;
     } else if (amount > maxSum) {
         amountErrEl.textContent = `Неверное значение. Максимальная сумма: ${maxSum} ₽`;
+        return;
     }
     if (Number.isNaN(period)) {
         periodErrEl.textContent = 'Неверное значение. Введите число месяцев, например: 3';
+        return;
     } else if (period < minPeriod) {
         periodErrEl.textContent = `Неверное значение. Минимальный период: ${minPeriod} месяца`;
+        return;
     } else if (period > maxPeriod) {
         periodErrEl.textContent = `Неверное значение. Максимальный период: ${maxPeriod} месяцев`;
+        return;
     }
 
     const result = caluclateReplenismentDeposite(amount, period);
