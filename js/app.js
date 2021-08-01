@@ -7,6 +7,8 @@ const periodInputEl = document.getElementById('period-input');
 const totalSumEl = document.getElementById('total');
 const profitEl = document.getElementById('profit');
 const percentEl = document.getElementById('percent');
+const amountErrEl = document.getElementById('amount-error');
+const periodErrEl = document.getElementById('period-error');
 
 
 function caluclateReplenismentDeposite(amount, period) {
@@ -47,9 +49,29 @@ function handleSubmit(evt) {
     totalSumEl.textContent = '';
     profitEl.textContent = '';
     percentEl.textContent = '';
+    amountErrEl.textContent = '';
+    periodErrEl.textContent = '';
 
     const amount = Number(amountInputEl.value);
     const period = Number(periodInputEl.value);
+    const minSum = 15000;
+    const maxSum = 50000000;
+    const minPeriod = 3;
+    const maxPeriod = 18;
+    if (Number.isNaN(amount)) {
+        amountErrEl.textContent = 'Неверное значение. Введите число, например: 15000';
+    } else if (amount < minSum) {
+        amountErrEl.textContent = `Неверное значение. Минимальная сумма: ${minSum} ₽`;
+    } else if (amount > maxSum) {
+        amountErrEl.textContent = `Неверное значение. Максимальная сумма: ${maxSum} ₽`;
+    }
+    if (Number.isNaN(period)) {
+        periodErrEl.textContent = 'Неверное значение. Введите число месяцев, например: 3';
+    } else if (period < minPeriod) {
+        periodErrEl.textContent = `Неверное значение. Минимальный период: ${minPeriod} месяца`;
+    } else if (period > maxPeriod) {
+        periodErrEl.textContent = `Неверное значение. Максимальный период: ${maxPeriod} месяцев`;
+    }
 
     const result = caluclateReplenismentDeposite(amount, period);
 
